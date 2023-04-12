@@ -1,0 +1,231 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description"
+    content="motco morogoro teacher colledge registration system">
+    <title>Morogoro tc : system</title>
+
+<link rel="stylesheet" href="{%  static 'css/style2.css'%}">
+  <link rel="stylesheet" href="{%  static 'css/bootstrap.min.css'%}">
+<link rel="stylesheet" href="{%  static 'css/style.css'%}">
+<link rel="stylesheet" href="{%  static 'css/mdb.css'%}">
+
+<link rel="stylesheet" href="{%  static 'css/bootstrap.css'%}">
+<link rel="stylesheet" href="{%  static 'css/jquery.mCustomScrollbar.min.css'%}">
+
+
+<link rel="shortcut icon" type="image/png" href="../media/default.jgp">
+
+
+ <style>
+
+  .footer{
+    bottom: 1px;
+     background-color: cornflowerblue;
+     clear: both;
+     padding:4px;
+     width: 100%;
+     text-align: center;
+     position: fixed;
+     color: white;
+  }
+  .dropdown-toggle{
+      color:black;
+  }
+
+  .asi,.elearning{
+    color:blueviolet;
+    color:black;
+}
+td{
+    font-weight: bold;
+
+}
+#genderid:invalid {
+    color: red;
+    background-color: rgb(231, 222, 222);
+}
+
+#genderid:valid {
+    color: green;
+}
+#maritalstatusid:invalid {
+    color: red;
+    background-color: rgb(231, 222, 222);
+}
+
+#maritalstatusid:valid {
+    color: green;
+}
+#fmin:invalid {
+    color: red;
+    background-color: rgb(231, 222, 222);
+}
+
+#fmin:valid {
+    color: green;
+    background-color: white;
+}
+td,th{
+    font-weight:800;
+}
+{% block style %} {% endblock style %}
+ </style>
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>MOTCO</h3>
+                <strong>DP</strong>
+            </div>
+
+            <ul class="list-unstyled components">
+          
+    <li>
+        <a href="#analysis" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="fa fa-laptop"></i>
+            MOCK RESULTS
+        </a>
+        <ul class="collapse list-unstyled" id="analysis">
+          
+           
+            <li>
+                <a href="{% url 'home'%}">GENERAL RESULTS</a>
+            </li>
+
+            <li>
+                <a href="{% url 'results'%}"> RESULTS ANALYSIS</a>
+            </li>
+
+                 <li>
+                <a href="{% url 'bestandpoor'%}">BEST & POOR </a>
+            </li>
+                 
+
+
+        </ul>
+</li>
+{%if user.authorities == 'staff' or user.authorities == 'admin' %}
+<li>
+    <a href="#registration" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <i class="fa fa-tachometer-alt"></i>
+        FOR STAFF
+    </a>
+    <ul class="collapse list-unstyled" id="registration">
+      
+       
+         <li>
+            <a href="{% url 'upload'%}">ACCOUNT</a>
+        </li>
+       
+
+             <li>
+            <a href="{% url 'marks'%}">MARKS</a>
+        </li>
+             
+        <li>
+            <a href="{% url 'bestandpoorupload'%}">BESTA & POOR</a>
+        </li>
+
+    </ul>
+</li>
+{%endif%}
+</ul>
+                
+             
+
+
+                   
+
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span style="float:left;">MENU</span>
+                    </button>
+             
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#"><img src="{% static 'profile/logo.png'%}" style='height:1px;'>{{user.username}}</a>
+                            </li>
+                      <li class="nav-item">
+                              <a class="nav-link" href="">{{user.fullname}}</a>
+                          </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="{% url 'logout'%}">Logout</a>
+                          </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+
+
+
+
+
+
+
+            {% block content %} {% endblock %}
+
+
+
+
+
+            
+            <div class="footer"><i> <a href="">administrator@gmail.com</a></i></i></div>
+        </div> </div>
+        
+           <script defer src="{% static 'js/loader.js'%}"></script>
+           <script defer src="{% static 'js/fontawesome.js'%}"></script>
+           <script src="{% static 'js/jquery.js'%}"></script>
+            <script src="{% static 'js/jquery.min.js'%}"></script>
+           <script src="{% static 'js/popper.min.js'%}"></script>
+            <script src="{% static 'js/bootstrap.min.js'%}"></script>
+           <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js'%}"></script>
+         
+        
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#sidebarCollapse').on('click', function () {
+                        $('#sidebar').toggleClass('active');
+                    });
+                });
+            </script>
+        
+        
+                <script>
+                    $(document).ready(function(){
+                    $("#myInput").on("keyup", function() {
+                     var value = $(this).val().toLowerCase();
+                     $("#myTable tr").filter(function() {
+                       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                     });
+                    });
+                    });
+                    </script>
+                    {% block scripts %} {% endblock scripts %}
+        

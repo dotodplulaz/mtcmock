@@ -1,0 +1,245 @@
+{% extends 'staffs/staffsidebar.html' %}
+{% load static %}
+{% block content %}
+<style>    table {
+       border-collapse: collapse;
+       width: 100%;
+     }
+     th,
+     td {
+       padding: 8px 16px;
+       border: 1px solid #ccc;
+
+     }
+     th {
+       background: #eee;
+     }
+
+</style>
+
+<div class="table-content">
+  {% if  i%}
+  {% if  i > 0 %}
+   <div class='alert alert-success alert-dismissible animated zoomIn'  style='margin:0px 40px;'>
+       <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+       <!-- {%for success in messages%}
+       <b>{{success}}</b>
+       {%endfor%} -->
+        <b>{{i}}  &nbsp RECORD UPLOADED UCCESSIFULLY</b>
+     </div>
+     {%endif%}
+        {%endif%}
+
+        {% if  l %}
+      {% if  j > 0 %}
+     <div style='margin:0px 40px;' class="alert alert-danger  alert-dismissible animated zoomIn'">
+       <h4><span style="color:blue;">{{j}}</span> &nbsp LIST OF UNSUCCESSIFULLY</H4>
+       <p>=================================================================</p>
+        <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+
+       {%for li in l %}
+       <b>{{li}}</b>,&nbsp
+       {%endfor%}
+        </div>
+          {%endif%}
+             {%endif%}
+     <div class="row">
+
+          <div class="col-md-11">
+            {% if keyyetu == 'null'%}
+            <table id="myTable" class="table">
+              <br>
+              <thead>
+
+       <tr>
+
+           <th> CODE</th>
+           <th>SUBJECT NAME</th>
+           <th><CENTER> LIST OF SELECTION</CENTER> </th>
+            <th>ACTION</th>
+     </tr>
+     </thead>
+        <tbody>
+     {% for sub in subject %}
+       <tr>
+         <form action="{% url 'uploadmarkspage'%} " method="post" class="form" enctype="multipart/form-data" > {% csrf_token %}
+        <td>{{sub.code}}</td>
+         <td>{{sub.subjectname}}</td>
+          <td>
+
+            <div class="row">
+              <div class="col-md-10">
+                  <label>FORM ?</label>
+            <select   name="forms"  style="height:30px;">
+               <option value="FORMONE">ONE</option>
+           <option value="FORMTWO">TWO</option>
+           <option value="FORMTHREE">THREE</option>
+       <option value="FORMFOUR">FOUR</option>  </select>
+       <label>EXAM TYPE?</label>
+ <select   name="examtype"  style="height:30px;">
+    <option value="JARIBIO">JARIBIO </option>
+    <option value="ENDEXAM">END EXAM</option>
+</select>
+
+
+               <label>TERM ?</label>
+         <select   name="terms"  style="height:30px;">
+            <option value="MIDTERM1">Mid Term 1</option>
+        <option value="TERMINAL">Terminal</option>
+        <option value="MIDTERM2">Mid Term 2</option>
+    <option value="ANNUAL">Annual</option>  </select>
+
+               <label> YEAR ?</label>
+         <select   name="academicyear"  style="height:30px;">
+            <option value="{{racademicyear}}">{{racademicyear}}</option>
+            <option value="{{academicyear}}">{{academicyear}}</option>
+              <option value="{{aacademicyear}}">{{aacademicyear}}</option>
+        </select>
+        </div>
+
+
+           </div>
+           </td>
+           <td>
+             <div class="row">
+               <div class="col-md-4"></div><div class="col-md-4">
+           <input type="hidden" name="subjectname" value="{{sub.subjectname}}">
+             <input type="hidden" name="code" value="{{sub.code}}">
+               <input type="hidden" name="keyyetu" value="firststep">
+             <input type="hidden" name="userid" value="{{user.username}}">
+            <div class="input-group mb-3">
+          <center><input type="submit" name="subjectcode" value="Submit" class="btn btn-sm btn-success waves-effect waves-light"></center>
+   </div>   </div>   </div>
+
+        </td>
+         </form>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="3">No Subject Recond is Found(0).
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+           </div>
+           {%elif keyyetu == 'firststep' %}
+<br><br>
+
+           <div class="table-header">
+           <br><BR><BR>
+            </div>
+               <div class="table-content">
+           <table cellpadding="0" cellspacing="0" border="0"   style="width:100%;" >
+
+               <tbody>
+
+                  <tr><td colspan="7">CHANGUA AINA UNAYOTAKA KUTUMIA KATIKA KUJAZA MARKS ZA WANAFUNZI </td></tr>
+                  <tr>
+                    <td colspan="7"><center> <span  style="font-size:24px;color:blue;font-weight:bold;">UPLOADING DETAILS </span></center></td></tr>
+                    <tr>
+            <th>CODE_</th>      <th> TERM TYPE</th><th> EXAM TYPE</th> <th> SUBJECT NAME</th>  <th> YEAR</th>  <th> CLASS | LEVEL</th>    <th>UPLOADING DETAILS</th>
+<tr><td>{{code}}</td><td>{{terms}}</td><td>{{examtype}}</td><td>{{subjectname}}</td><td>{{academicyear}}</td><td>{{forms}}</td>
+<td >{{user.firstname}}  &nbsp  {{user.firstname}}</td>
+        </tr>          </tbody>
+                </table>
+<br><br>
+
+                <table cellpadding="0" cellspacing="0" border="0"   style="width:98%;" >
+
+                    <tbody>
+                <tr><td colspan="7">NJIA ZA KUWEKA TAKWIMU ZA UFAULU WA WANAFUNZI LIVE UPLOAD </td></tr>
+                                        <tr><td>01</td>
+                                        <td colspan="3"><p><i>List of all enrolled (registered student in {{academicyear}} in {{subjectname}} based on {{forms}}</i></p></td>
+                                          <td colspan="2"><center> <span  style="font-size:24px;color:blue;font-weight:bold;">
+
+  <a  href="../d-gf-lg-p/{{code}}/{{subjectname}}/{{academicyear}}/{{forms}}/{{terms}}/{{examtype}}/"> <center> LIVE
+  <br>
+<div class="notify" style="color:blue;"> <span class="heartbit"></span> <span class="point"></span> </div></center> </a>
+                                          </span></center></td></tr>
+                                        </tbody>
+                                       </table>
+                                       <table cellpadding="0" cellspacing="0" border="0"   style="width:98%;" >
+
+                                           <tbody>
+                                       <tr><td colspan="7"> NJIA ZA KUWEKA TAKWIMU ZA UFAULU WA WANAFUNZI TEMPLATE UPLOAD  </td></tr>
+                                                               <tr><td>02</td>
+                                                               <td colspan="3">
+                                                                  <p>i. first step download excel templete</p>
+                                                                 <p> ii.fill the student marks to the downloaded template</p>
+
+<a style='color:white;background-color:cornflowerblue;padding:4px;border-radius:2px;' href="../cplus-cod-se/{{code}}/{{subjectname}}/{{academicyear}}/{{forms}}/{{terms}}/{{examtype}}/">download<i class="fa fa-download"></i></a></td>
+                                                                 <td colspan="2">  <p>iii. after entering the student mark completely</p>
+                                                                   <p> iv.Attach here your file that you have downloaded</p><br>
+                                                                    <form action="{% url 'uploadmarkspage'%} " method="post" class="form" enctype="multipart/form-data" >
+                                                                       {% csrf_token %}
+                                                                   <input type="file" name="myfile" >
+                                                                   <input type="hidden" name="terms" value="{{terms}}">
+                                                                   <input type="hidden" name="examtype" value="{{examtype}}">
+                                                                   <input type="hidden" name="academicyear" value="{{academicyear}}">
+                                                                   <input type="hidden" name="forms" value="{{forms}}">
+                                                                   <input type="hidden" name="code" value="{{code}}">
+                                                                   <input type="hidden" name="keyyetu" value="thirdstep">
+                                                                    <input type="hidden" name="subjectname" value="{{subjectname}}">
+                                                                   <button type="submit" name="upload" value="upload" class="btn btn-primary">upload file<i class="fa fa-upload"></i></button>
+                                                                   </form>
+                                                                 </td></tr>
+                                                               </tbody>
+                                                              </table>
+
+
+             </div>
+
+             {%elif keyyetu == 'thirdstep' %}
+
+             <div class="table-header">
+             <br><BR><BR>
+              </div>
+                 <div class="table-content">
+             <table cellpadding="0" cellspacing="0" border="0"   style="width:100%;" >
+
+                 <tbody>
+
+                    <tr><td colspan="7">CHANGUA AINA UNAYOTAKA KUTUMIA KATIKA KUJAZA MARKS ZA WANAFUNZI </td></tr>
+                    <tr>
+                      <td colspan="7"><center> <span  style="font-size:24px;color:blue;font-weight:bold;">UPLOADING DETAILS </span></center></td></tr>
+                      <tr>
+              <th>CODE_</th>      <th> TERM TYPE</th> <th> SUBJECT NAME</th>  <th> YEAR</th>  <th> CLASS | LEVEL</th>    <th>UPLOADING DETAILS</th>
+            <tr><td>{{code}}</td>
+            <td>{{terms}}</td>
+            <td>{{subjectname}}</td>
+            <td>{{academicyear}}</td>
+            <td>{{forms}}</td>
+            <td colspan="2">{{user.firstname}}  &nbsp  {{user.firstname}}</td>
+            </tr>          </tbody>
+                  </table>
+            <br><br>
+
+                  <table cellpadding="0" cellspacing="0" border="0"   style="width:98%;" >
+
+                      <tbody>
+                  <tr><td colspan="7">NJIA ZA KUWEKA TAKWIMU ZA UFAULU WA WANAFUNZI LIVE UPLOAD </td></tr>
+                                          <tr><td>01</td>
+                                          <td colspan="3"><p><i>List of all enrolled (registered student in {{academicyear}} in {{subjectname}} based on {{forms}}</i></p></td>
+                                            <td colspan="2"><center> <span  style="font-size:24px;color:blue;font-weight:bold;">
+
+            <a  href="../d-gf-lg-p/{{code}}/{{subjectname}}/{{academicyear}}/{{forms}}/{{terms}}/{{examtype}}/"> <center> LIVE
+            <br>
+            <div class="notify" style="color:blue;"> <span class="heartbit"></span> <span class="point"></span> </div></center> </a>
+                                            </span></center></td></tr>
+                                          </tbody>
+                                         </table>
+
+
+               </div>
+
+
+
+
+           {%else%}
+
+           {%endif%}
+
+         </div>
+       </div>
+
+                  {% endblock %}

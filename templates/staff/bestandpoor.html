@@ -1,0 +1,1553 @@
+{% extends 'staff/sidebar.html' %}
+{% load static %}
+{% block style %} 
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      .dp{
+        padding: 1px 10px;
+        border: 1px solid #ccc;
+        text-align:center;
+        height:1px;
+ 
+      }
+     .dp {
+        border: 1px solid #a1b2c3;
+        text-align:center;
+        height:1px;
+      }
+      .btd{
+        padding: 1px 10px;
+        border: 1px solid #ccc;
+        text-align:center;
+        color:blue;
+        font-weight:bold;
+        height:1px;
+      }
+      td,th{
+        height:1px;
+      }
+      tr{
+        height:10px;
+      }
+  </style>
+  {% endblock style %} 
+{% block content %}
+ 
+<div class="card-body">
+  {% if  messages%}
+   <div class='alert alert-success alert-dismissible animated zoomIn'>
+       <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+       {%for success in messages%}
+       <b>{{success}}</b>
+       {%endfor%}
+     </div>
+     {%endif%}
+       {% if  failed %}
+     <div class='alert alert-danger alert-dismissible animated zoomIn'>
+         <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+         <b>{{failed}}</b>
+       </div>
+       {%endif%}
+
+       <input name="b_print" type="button" class="btn btn-success"   onClick="printdivone('div_printone');" value="PRINT RESULTSschoolwise MOTCO REPORT" style ="float:left;width:70%; "><br><br>
+       <div id="div_printone">
+    <div class="table-responsive ">
+ 
+        <table class="table">
+             
+            <thead>
+     <tr>
+         <th colspan="9" class='alert alert-success'><B>EXAMINATION BEST TEN PERFORMANCE IN MOTCO COLLEGE</B></th>
+   </tr>
+    
+    </table>
+   <table id="mytablebestall" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                  <th  class='alert alert-success'> &nbsp</th>
+                  <th  class='alert alert-success'>INDEX NUMBER</th>
+                  <th  class='alert alert-success'>FULL NAME</th>
+                   <th  class='alert alert-success' >GENDER</th>
+                    <th  class='alert alert-success'>OPTION</th>
+                    <th  class='alert alert-success'>PERFORMANCE SUBJECT LISTING</th>
+                    <th  class='alert alert-success'>DIVISION</th>
+                    <th  class='alert alert-success'>POINTS</th>
+                </tr>
+            </thead>
+     
+                  <tbody>
+     {%for s in accounts%}   
+     {%if s.option == 'CBE'%}     
+  <tr>
+    <td class="td">{{forloop.counter}}</td>
+  <td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+  
+    {%for r in resultsschoolwise%} 
+    {%if s.username == r.username_id%}
+   
+    <td>
+      <i class="somo">CHEM -</i>'{{r.grade.CG}}-({{r.subject.CHEM}})'&nbsp
+      <i class="somo"> BIO -</i> '{{r.grade.BG}}({{r.subject.BIO}})'&nbsp
+        <i class="somo">EDU -</i>  '{{r.grade.EG}}({{r.subject.EDU}})'&nbsp
+          <i class="somo"> BAM - </i> '{{r.grade.BAG}}({{r.subject.BAM}})'&nbsp
+            <i class="somo">GS -</i> '{{r.grade.GSG}}({{r.subject.GS}})'&nbsp
+    </td>
+    <td class="td">{{r.division}}</td>
+    <td class="td">{{r.point}}</td>
+  {%endif%}
+    {%endfor%}
+  </tr>
+  {%endif%}
+  
+  
+  
+  
+  {% comment %} END OF CBE {% endcomment %}
+  {%if s.option == 'CME'%}     
+  <tr>
+    <td class="td">{{forloop.counter}}</td>
+  <td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+  
+    {%for r in resultsschoolwise%} 
+    {%if s.username == r.username_id%}
+    <td>
+      <i class="somo">CHEM-</i>' {{r.grade.CG}}({{r.subject.CHEM}})'&nbsp
+        <i class="somo">MATH-</i>' {{r.grade.MG}}({{r.subject.MATH}})'&nbsp
+          <i class="somo">EDU-</i>' {{r.grade.EG}}({{r.subject.EDU}})'&nbsp
+            <i class="somo">GS-</i>' {{r.grade.GSG}}({{r.subject.GS}})'&nbsp
+    </td>
+    <td class="td">{{r.division}}</td>
+    <td class="td">{{r.point}}</td>
+  {%endif%}
+    {%endfor%}
+  </tr>
+  {%endif%}
+  
+  
+  
+  
+  {% comment %} END OF PBE {% endcomment %}
+  {%if s.option == 'PBE'%}     
+  <tr>
+    <td class="td">{{forloop.counter}}</td>
+  <td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+  
+    {%for r in resultsschoolwise%} 
+    {%if s.username == r.username_id%}
+    <td>
+      <i class="somo">PHY-</i>' {{r.grade.PG}}({{r.subject.PHY}})'&nbsp
+      <i class="somo">BIO-</i>' {{r.grade.BG}}({{r.subject.BIO}})'&nbsp
+      <i class="somo">EDU-</i>' {{r.grade.EG}}({{r.subject.EDU}})'&nbsp
+    
+      <i class="somo">BAM-</i>' {{r.grade.BAG}}({{r.subject.BAM}})'&nbsp
+        <i class="somo">GS-</i>' {{r.grade.GSG}}({{r.subject.GS}})'&nbsp
+    </td>
+    <td class="td">{{r.division}}</td>
+    <td class="td">{{r.point}}</td>
+  {%endif%}
+    {%endfor%}
+  </tr>
+  {%endif%}
+  
+  
+  
+  
+  
+  
+  {% comment %} END OF PBE {% endcomment %}
+  {%if s.option == 'PME'%}     
+  <tr>
+    <td class="td">{{forloop.counter}}</td>
+  <td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+  
+    {%for r in resultsschoolwise%} 
+    {%if s.username == r.username_id%}
+    <td> 
+      <i class="somo">PHY-</i>' {{r.grade.PG}}({{r.subject.PHY}})'&nbsp
+      <i class="somo">MATH-</i>' {{r.grade.MG}}({{r.subject.MATH}})'&nbsp
+      <i class="somo">EDU-</i>' {{r.grade.EG}}({{r.subject.EDU}})'&nbsp
+     
+        <i class="somo">GS-</i>' {{r.grade.GSG}}({{r.subject.GS}})'&nbsp
+    </td>
+    <td class="td">{{r.division}}</td>
+    <td class="td">{{r.point}}</td>
+  {%endif%}
+    {%endfor%}
+  </tr>
+  {%endif%}
+  
+  
+  
+  
+  {% comment %} END OF PME {% endcomment %}
+  {%if s.option == 'PCE'%}     
+  <tr>
+    <td class="td">{{forloop.counter}}</td>
+  <td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+  
+    {%for r in resultsschoolwise%} 
+    {%if s.username == r.username_id%}
+    <td>
+      <i class="somo">PHY-</i>' {{r.grade.PG}}({{r.subject.PHY}})'&nbsp
+        <i class="somo">CHEM-</i>' {{r.grade.CG}}({{r.subject.CHEM}})'&nbsp
+          <i class="somo">EDU-</i>' {{r.grade.EG}}({{r.subject.EDU}})'&nbsp
+            <i class="somo">BAM-</i>' {{r.grade.BAG}}({{r.subject.BAM}})'&nbsp
+              <i class="somo">GS-</i>' {{r.grade.GSG}}({{r.subject.GS}})'&nbsp 
+    </td>
+    <td class="td">{{r.division}}</td>
+    <td class="td">{{r.point}}</td>
+  {%endif%}
+    {%endfor%}
+  </tr>
+  {%endif%}
+  
+  
+  
+  
+  
+  {% comment %} END OF mcse {% endcomment %}
+  {%if s.option == 'MCE'%}     
+  <tr>
+    <td class="td">{{forloop.counter}}</td>
+  <td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+  
+    {%for r in resultsschoolwise%} 
+    {%if s.username == r.username_id%}
+    <td>
+      <i class="somo">MATH-</i>' {{r.grade.MG}}({{r.subject.MATH}})'&nbsp
+        <i class="somo">COMP-</i>' {{r.grade.COG}}({{r.subject.COMP}})'&nbsp
+          <i class="somo">EDU-</i>' {{r.grade.EG}}({{r.subject.EDU}})'&nbsp
+            <i class="somo">GS-</i>' {{r.grade.GSG}}({{r.subject.GS}})'&nbsp 
+    </td>
+    <td class="td">{{r.division}}</td>
+    <td class="td">{{r.point}}</td>
+  {%endif%}
+    {%endfor%}
+  </tr>
+  {%endif%}
+  
+  
+  
+  
+  
+  
+  
+    {%endfor%}
+                                             </tbody>
+                                         </table>
+  
+
+
+
+
+
+
+
+
+
+
+
+                                         <table class="table">
+                                          
+                                            <thead>
+                                     <tr>
+                                         <th colspan="9" class='alert alert-danger'><B>EXAMINATION POOR TEN PERFORMANCE IN MOTCO COLLEGE</B></th>
+                                   </tr>
+                                    
+                                    </table>
+                                
+                                
+                                 
+                                        <table id="mytablepoorall" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                  <th class='alert alert-warning'> &nbsp</th>
+                                                  <th class='alert alert-warning'>INDEX NUMBER</th>
+                                                  <th class='alert alert-warning'>FULL NAME</th>
+                                                   <th class='alert alert-warning' >GENDER</th>
+                                                    <th class='alert alert-warning'>OPTION</th>
+                                                    <th class='alert alert-warning'>PERFORMANCE SUBJECT LISTING</th>
+                                                    <th class='alert alert-warning'>DIVISION</th>
+                                                    <th class='alert alert-warning'>POINTS</th>
+                                                </tr>
+                                            </thead>
+                                     
+                                                  <tbody>
+                                     {%for s in accountspoor%}   
+                                     {%if s.option == 'CBE'%}     
+                                  <tr>
+                                    <td class="td">{{forloop.counter}}</td>
+                                  <td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+                                  
+                                    {%for r in resultsschoolwisepoor%} 
+                                    {%if s.username == r.username_id%}
+                                   
+                                    <td>
+                                      <i class="somo">CHEM -</i>'{{r.grade.CG}}-({{r.subject.CHEM}})'&nbsp
+                                      <i class="somo"> BIO -</i> '{{r.grade.BG}}({{r.subject.BIO}})'&nbsp
+                                        <i class="somo">EDU -</i>  '{{r.grade.EG}}({{r.subject.EDU}})'&nbsp
+                                          <i class="somo"> BAM - </i> '{{r.grade.BAG}}({{r.subject.BAM}})'&nbsp
+                                            <i class="somo">GS -</i> '{{r.grade.GSG}}({{r.subject.GS}})'&nbsp
+                                    </td>
+                                    <td class="td">{{r.division}}</td>
+                                    <td class="td">{{r.point}}</td>
+                                  {%endif%}
+                                    {%endfor%}
+                                  </tr>
+                                  {%endif%}
+                                  
+                                  
+                                  
+                                  
+                                  {% comment %} END OF CBE {% endcomment %}
+                                  {%if s.option == 'CME'%}     
+                                  <tr>
+                                    <td class="td">{{forloop.counter}}</td>
+                                  <td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+                                  
+                                    {%for r in resultsschoolwisepoor%} 
+                                    {%if s.username == r.username_id%}
+                                    <td>
+                                      <i class="somo">CHEM-</i>' {{r.grade.CG}}({{r.subject.CHEM}})'&nbsp
+                                        <i class="somo">MATH-</i>' {{r.grade.MG}}({{r.subject.MATH}})'&nbsp
+                                          <i class="somo">EDU-</i>' {{r.grade.EG}}({{r.subject.EDU}})'&nbsp
+                                            <i class="somo">GS-</i>' {{r.grade.GSG}}({{r.subject.GS}})'&nbsp
+                                    </td>
+                                    <td class="td">{{r.division}}</td>
+                                    <td class="td">{{r.point}}</td>
+                                  {%endif%}
+                                    {%endfor%}
+                                  </tr>
+                                  {%endif%}
+                                  
+                                  
+                                  
+                                  
+                                  {% comment %} END OF PBE {% endcomment %}
+                                  {%if s.option == 'PBE'%}     
+                                  <tr>
+                                    <td class="td">{{forloop.counter}}</td>
+                                  <td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+                                  
+                                    {%for r in resultsschoolwisepoor%} 
+                                    {%if s.username == r.username_id%}
+                                    <td>
+                                      <i class="somo">PHY-</i>' {{r.grade.PG}}({{r.subject.PHY}})'&nbsp
+                                      <i class="somo">BIO-</i>' {{r.grade.BG}}({{r.subject.BIO}})'&nbsp
+                                      <i class="somo">EDU-</i>' {{r.grade.EG}}({{r.subject.EDU}})'&nbsp
+                                    
+                                      <i class="somo">BAM-</i>' {{r.grade.BAG}}({{r.subject.BAM}})'&nbsp
+                                        <i class="somo">GS-</i>' {{r.grade.GSG}}({{r.subject.GS}})'&nbsp
+                                    </td>
+                                    <td class="td">{{r.division}}</td>
+                                    <td class="td">{{r.point}}</td>
+                                  {%endif%}
+                                    {%endfor%}
+                                  </tr>
+                                  {%endif%}
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  {% comment %} END OF PBE {% endcomment %}
+                                  {%if s.option == 'PME'%}     
+                                  <tr>
+                                    <td class="td">{{forloop.counter}}</td>
+                                  <td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+                                  
+                                    {%for r in resultsschoolwisepoor%} 
+                                    {%if s.username == r.username_id%}
+                                    <td> 
+                                      <i class="somo">PHY-</i>' {{r.grade.PG}}({{r.subject.PHY}})'&nbsp
+                                      <i class="somo">MATH-</i>' {{r.grade.MG}}({{r.subject.MATH}})'&nbsp
+                                      <i class="somo">EDU-</i>' {{r.grade.EG}}({{r.subject.EDU}})'&nbsp
+                                     
+                                        <i class="somo">GS-</i>' {{r.grade.GSG}}({{r.subject.GS}})'&nbsp
+                                    </td>
+                                    <td class="td">{{r.division}}</td>
+                                    <td class="td">{{r.point}}</td>
+                                  {%endif%}
+                                    {%endfor%}
+                                  </tr>
+                                  {%endif%}
+                                  
+                                  
+                                  
+                                  
+                                  {% comment %} END OF PME {% endcomment %}
+                                  {%if s.option == 'PCE'%}     
+                                  <tr>
+                                    <td class="td">{{forloop.counter}}</td>
+                                  <td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+                                  
+                                    {%for r in resultsschoolwisepoor%} 
+                                    {%if s.username == r.username_id%}
+                                    <td>
+                                      <i class="somo">PHY-</i>' {{r.grade.PG}}({{r.subject.PHY}})'&nbsp
+                                        <i class="somo">CHEM-</i>' {{r.grade.CG}}({{r.subject.CHEM}})'&nbsp
+                                          <i class="somo">EDU-</i>' {{r.grade.EG}}({{r.subject.EDU}})'&nbsp
+                                            <i class="somo">BAM-</i>' {{r.grade.BAG}}({{r.subject.BAM}})'&nbsp
+                                              <i class="somo">GS-</i>' {{r.grade.GSG}}({{r.subject.GS}})'&nbsp 
+                                    </td>
+                                    <td class="td">{{r.division}}</td>
+                                    <td class="td">{{r.point}}</td>
+                                  {%endif%}
+                                    {%endfor%}
+                                  </tr>
+                                  {%endif%}
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  {% comment %} END OF mcse {% endcomment %}
+                                  {%if s.option == 'MCE'%}     
+                                  <tr>
+                                    <td class="td">{{forloop.counter}}</td>
+                                  <td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+                                  
+                                    {%for r in resultsschoolwisepoor%} 
+                                    {%if s.username == r.username_id%}
+                                    <td>
+                                      <i class="somo">MATH-</i>' {{r.grade.MG}}({{r.subject.MATH}})'&nbsp
+                                        <i class="somo">COMP-</i>' {{r.grade.COG}}({{r.subject.COMP}})'&nbsp
+                                          <i class="somo">EDU-</i>' {{r.grade.EG}}({{r.subject.EDU}})'&nbsp
+                                            <i class="somo">GS-</i>' {{r.grade.GSG}}({{r.subject.GS}})'&nbsp 
+                                    </td>
+                                    <td class="td">{{r.division}}</td>
+                                    <td class="td">{{r.point}}</td>
+                                  {%endif%}
+                                    {%endfor%}
+                                  </tr>
+                                  {%endif%}
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                    {%endfor%}
+                                                                             </tbody>
+                                                                         </table>
+                                  
+                                                      
+                                                                         <table class="table">
+                                                                          <br>
+                                                                          <thead>
+                                                                    <tr>
+                                                                        <th colspan="9" class='alert alert-success'><B>EXAMINATION BEST TEN PERFORMANCE IN PHYSICS</B></th>
+                                                                  </tr>
+                                                                  
+                                                                  </table>
+                                                              
+                                                                  <div class="table-responsive ">
+                                                                      <table id="mytablepoorphy" class="table table-success" cellspacing="0" width="100%" >
+                                                                          <thead>
+                                                                              <tr>
+                                                                                <th class='alert alert-success'> &nbsp</th>
+                                                                                <th class='alert alert-success'>INDEX NUMBER</th>
+                                                                                <th class='alert alert-success'>FULL NAME</th>
+                                                                                  <th class='alert alert-success' style="text-align:center;">GENDER</th>
+                                                                                  <th class='alert alert-success'style="text-align:center;">OPTION</th>
+                                                                                  <th class='alert alert-success'style="text-align:center;">AVERAGE MARKS</th>
+                                                                                  <th class='alert alert-success'style="text-align:center;">GRADE</th>
+                                                                                    
+                                                                              </tr>
+                                                                          </thead>
+                                                                    
+                                                                                <tbody>
+                                                                    {%for s in bestphy%}  
+                                                
+                                                                <tr>
+                                                                  <td class="td">{{forloop.counter}}</td>
+                                                                <td class="btd" style="text-align:left;">{{s.username}}</td>
+                                                                <td class="btd" style="text-align:left;">{{s.fullname}}</td>
+                                                                <td class="btd" style="text-align:center;">{{s.sex}}</td>
+                                                                <td class="btd" style="text-align:center;">{{s.option}}</td>
+                                                                <td class="btd" style="text-align:center;">{{s.phy}}</td>
+                                                                  <td style="text-align:center;color:black;font-weight:bold;"> <i class="somo">
+                                                                    {%if s.phy > 79 %}'A'
+                                                                    {%elif s.phy > 69 %}
+                                                                    'B'{%elif s.phy > 59 %}
+                                                                    'C'{%elif s.phy > 49 %}
+                                                                    'D'{%elif s.phy > 39 %}
+                                                                    'E'{%elif s.phy > 34 %}
+                                                                    'S'{%else%}'F'{%endif%}
+                                                                    
+                                                                  </i></td>
+                                                                  
+                                                                  
+                                                                </tr>
+                                                                
+                                                                {%endfor%}
+                                                                
+                                                                </tbody>
+                                                                 </table>
+                                                
+                                                </div>
+
+                                                                              
+                        <table class="table">
+                          
+                          <thead>
+                    <tr>
+                        <th colspan="9" class='alert alert-danger'><B>EXAMINATION POOR TEN PERFORMANCE IN PHYSICS</B></th>
+                  </tr>
+                  
+                  </table>
+              
+                  
+                      <table id="mytablepoorphy" class="table table-dark" cellspacing="0" width="100%" style='background-color:pale;'>
+                          <thead>
+                              <tr>
+                                <th class='alert alert-warning'> &nbsp</th>
+                                <th class='alert alert-warning'>INDEX NUMBER</th>
+                                <th class='alert alert-warning'>FULL NAME</th>
+                                  <th class='alert alert-warning' style="text-align:center;">GENDER</th>
+                                  <th class='alert alert-warning'style="text-align:center;">OPTION</th>
+                                  <th class='alert alert-warning'style="text-align:center;">AVERAGE MARKS</th>
+                                  <th class='alert alert-warning'style="text-align:center;">GRADE</th>
+                                    
+                              </tr>
+                          </thead>
+                    
+                                <tbody>
+                    {%for s in poorphy%}  
+
+                <tr>
+                  <td class="td">{{forloop.counter}}</td>
+                <td class="td">{{s.username}}</td>
+                <td class="td">{{s.fullname}}</td>
+                <td class="td" style="text-align:center;">{{s.sex}}</td>
+                <td class="td" style="text-align:center;">{{s.option}}</td>
+                <td class="td" style="text-align:center;">{{s.phy}}</td>
+                  <td style="text-align:center;"> <i class="somo">
+                    {%if s.phy > 79 %}'A'
+                    {%elif s.phy > 69 %}
+                    'B'{%elif s.phy > 59 %}
+                    'C'{%elif s.phy > 49 %}
+                    'D'{%elif s.phy > 39 %}
+                    'E'{%elif s.phy > 34 %}
+                    'S'{%else%}'F'{%endif%}
+                    
+                  </i></td>
+                  
+                  
+                </tr>
+                
+                {%endfor%}
+                
+                </tbody>
+                 </table>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 
+                 <table class="table">
+                  <br>
+                  <thead>
+            <tr>
+                <th colspan="9" class='alert alert-success'><B>EXAMINATION BEST TEN PERFORMANCE IN CHEMISTRY</B></th>
+          </tr>
+          
+          </table>
+      
+          <div class="table-responsive ">
+              <table id="mytablepoorphy" class="table table-success" cellspacing="0" width="100%" >
+                  <thead>
+                      <tr>
+                        <th class='alert alert-success'> &nbsp</th>
+                        <th class='alert alert-success'>INDEX NUMBER</th>
+                        <th class='alert alert-success'>FULL NAME</th>
+                          <th class='alert alert-success' style="text-align:center;">GENDER</th>
+                          <th class='alert alert-success'style="text-align:center;">OPTION</th>
+                          <th class='alert alert-success'style="text-align:center;">AVERAGE MARKS</th>
+                          <th class='alert alert-success'style="text-align:center;">GRADE</th>
+                            
+                      </tr>
+                  </thead>
+            
+                        <tbody>
+            {%for s in bestchem%}  
+
+        <tr>
+          <td class="td">{{forloop.counter}}</td>
+        <td class="btd" style="text-align:left;">{{s.username}}</td>
+        <td class="btd" style="text-align:left;">{{s.fullname}}</td>
+        <td class="btd" style="text-align:center;">{{s.sex}}</td>
+        <td class="btd" style="text-align:center;">{{s.option}}</td>
+        <td class="btd" style="text-align:center;">{{s.chem}}</td>
+          <td style="text-align:center;color:black;font-weight:bold;"> <i class="somo">
+            {%if s.chem > 79 %}'A'
+            {%elif s.chem > 69 %}
+            'B'{%elif s.chem > 59 %}
+            'C'{%elif s.chem > 49 %}
+            'D'{%elif s.chem > 39 %}
+            'E'{%elif s.phy > 34 %}
+            'S'{%else%}'F'{%endif%}
+            
+          </i></td>
+          
+          
+        </tr>
+        
+        {%endfor%}
+        
+        </tbody>
+         </table>
+
+</div>
+
+                      
+<table class="table">
+
+<thead>
+<tr>
+<th colspan="9" class='alert alert-danger'><B>EXAMINATION POOR TEN PERFORMANCE IN CHEMISTRY</B></th>
+</tr>
+
+</table>
+
+
+<table id="mytablepoorphy" class="table table-dark" cellspacing="0" width="100%" style='background-color:pale;'>
+<thead>
+<tr>
+<th class='alert alert-warning'> &nbsp</th>
+<th class='alert alert-warning'>INDEX NUMBER</th>
+<th class='alert alert-warning'>FULL NAME</th>
+<th class='alert alert-warning' style="text-align:center;">GENDER</th>
+<th class='alert alert-warning'style="text-align:center;">OPTION</th>
+<th class='alert alert-warning'style="text-align:center;">AVERAGE MARKS</th>
+<th class='alert alert-warning'style="text-align:center;">GRADE</th>
+
+</tr>
+</thead>
+
+<tbody>
+{%for s in poorchem%}  
+
+<tr>
+<td class="td">{{forloop.counter}}</td>
+<td class="td">{{s.username}}</td>
+<td class="td">{{s.fullname}}</td>
+<td class="td" style="text-align:center;">{{s.sex}}</td>
+<td class="td" style="text-align:center;">{{s.option}}</td>
+<td class="td" style="text-align:center;">{{s.chem}}</td>
+<td style="text-align:center;"> <i class="somo">
+{%if s.chem > 79 %}'A'
+{%elif s.chem > 69 %}
+'B'{%elif s.chem > 59 %}
+'C'{%elif s.chem > 49 %}
+'D'{%elif s.chem > 39 %}
+'E'{%elif s.chem > 34 %}
+'S'{%else%}'F'{%endif%}
+
+</i></td>
+
+
+</tr>
+
+{%endfor%}
+
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table class="table">
+  <br>
+  <thead>
+<tr>
+<th colspan="9" class='alert alert-success'><B>EXAMINATION BEST TEN PERFORMANCE IN BIOLOGY</B></th>
+</tr>
+
+</table>
+
+<div class="table-responsive ">
+<table id="mytablepoorphy" class="table table-success" cellspacing="0" width="100%" >
+  <thead>
+      <tr>
+        <th class='alert alert-success'> &nbsp</th>
+        <th class='alert alert-success'>INDEX NUMBER</th>
+        <th class='alert alert-success'>FULL NAME</th>
+          <th class='alert alert-success' style="text-align:center;">GENDER</th>
+          <th class='alert alert-success'style="text-align:center;">OPTION</th>
+          <th class='alert alert-success'style="text-align:center;">AVERAGE MARKS</th>
+          <th class='alert alert-success'style="text-align:center;">GRADE</th>
+            
+      </tr>
+  </thead>
+
+        <tbody>
+{%for s in bestbio%}  
+
+<tr>
+<td class="td">{{forloop.counter}}</td>
+<td class="btd" style="text-align:left;">{{s.username}}</td>
+<td class="btd" style="text-align:left;">{{s.fullname}}</td>
+<td class="btd" style="text-align:center;">{{s.sex}}</td>
+<td class="btd" style="text-align:center;">{{s.option}}</td>
+<td class="btd" style="text-align:center;">{{s.bio}}</td>
+<td style="text-align:center;color:black;font-weight:bold;"> <i class="somo">
+{%if s.bio > 79 %}'A'
+{%elif s.bio > 69 %}
+'B'{%elif s.bio > 59 %}
+'C'{%elif s.bio > 49 %}
+'D'{%elif s.bio > 39 %}
+'E'{%elif s.bio > 34 %}
+'S'{%else%}'F'{%endif%}
+
+</i></td>
+
+
+</tr>
+
+{%endfor%}
+
+</tbody>
+</table>
+
+</div>
+
+      
+<table class="table">
+
+<thead>
+<tr>
+<th colspan="9" class='alert alert-danger'><B>EXAMINATION POOR TEN PERFORMANCE IN BIOLOGY</B></th>
+</tr>
+
+</table>
+
+
+<table id="mytablepoorphy" class="table table-dark" cellspacing="0" width="100%" style='background-color:pale;'>
+<thead>
+<tr>
+<th class='alert alert-warning'> &nbsp</th>
+<th class='alert alert-warning'>INDEX NUMBER</th>
+<th class='alert alert-warning'>FULL NAME</th>
+<th class='alert alert-warning' style="text-align:center;">GENDER</th>
+<th class='alert alert-warning'style="text-align:center;">OPTION</th>
+<th class='alert alert-warning'style="text-align:center;">AVERAGE MARKS</th>
+<th class='alert alert-warning'style="text-align:center;">GRADE</th>
+
+</tr>
+</thead>
+
+<tbody>
+{%for s in poorbio%}  
+
+<tr>
+<td class="td">{{forloop.counter}}</td>
+<td class="td">{{s.username}}</td>
+<td class="td">{{s.fullname}}</td>
+<td class="td" style="text-align:center;">{{s.sex}}</td>
+<td class="td" style="text-align:center;">{{s.option}}</td>
+<td class="td" style="text-align:center;">{{s.bio}}</td>
+<td style="text-align:center;"> <i class="somo">
+{%if s.bio > 79 %}'A'
+{%elif s.bio > 69 %}
+'B'{%elif s.bio > 59 %}
+'C'{%elif s.bio > 49 %}
+'D'{%elif s.bio > 39 %}
+'E'{%elif s.bio > 34 %}
+'S'{%else%}'F'{%endif%}
+
+</i></td>
+
+
+</tr>
+
+{%endfor%}
+
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table class="table">
+  <br>
+  <thead>
+<tr>
+<th colspan="9" class='alert alert-success'><B>EXAMINATION BEST TEN PERFORMANCE IN ADVANCED MATHEMATICS</B></th>
+</tr>
+
+</table>
+
+<div class="table-responsive ">
+<table id="mytablepoorphy" class="table table-success" cellspacing="0" width="100%" >
+  <thead>
+      <tr>
+        <th class='alert alert-success'> &nbsp</th>
+        <th class='alert alert-success'>INDEX NUMBER</th>
+        <th class='alert alert-success'>FULL NAME</th>
+          <th class='alert alert-success' style="text-align:center;">GENDER</th>
+          <th class='alert alert-success'style="text-align:center;">OPTION</th>
+          <th class='alert alert-success'style="text-align:center;">AVERAGE MARKS</th>
+          <th class='alert alert-success'style="text-align:center;">GRADE</th>
+            
+      </tr>
+  </thead>
+
+        <tbody>
+{%for s in bestmath%}  
+
+<tr>
+<td class="td">{{forloop.counter}}</td>
+<td class="btd" style="text-align:left;">{{s.username}}</td>
+<td class="btd" style="text-align:left;">{{s.fullname}}</td>
+<td class="btd" style="text-align:center;">{{s.sex}}</td>
+<td class="btd" style="text-align:center;">{{s.option}}</td>
+<td class="btd" style="text-align:center;">{{s.math}}</td>
+<td style="text-align:center;color:black;font-weight:bold;"> <i class="somo">
+{%if s.math > 79 %}'A'
+{%elif s.math > 69 %}
+'B'{%elif s.math > 59 %}
+'C'{%elif s.math > 49 %}
+'D'{%elif s.math > 39 %}
+'E'{%elif s.math > 34 %}
+'S'{%else%}'F'{%endif%}
+
+</i></td>
+
+
+</tr>
+
+{%endfor%}
+
+</tbody>
+</table>
+
+</div>
+
+      
+<table class="table">
+
+<thead>
+<tr>
+<th colspan="9" class='alert alert-danger'><B>EXAMINATION POOR TEN PERFORMANCE IN ADVANCED MATHEMATICS</B></th>
+</tr>
+
+</table>
+
+
+<table id="mytablepoorphy" class="table table-dark" cellspacing="0" width="100%" style='background-color:pale;'>
+<thead>
+<tr>
+<th class='alert alert-warning'> &nbsp</th>
+<th class='alert alert-warning'>INDEX NUMBER</th>
+<th class='alert alert-warning'>FULL NAME</th>
+<th class='alert alert-warning' style="text-align:center;">GENDER</th>
+<th class='alert alert-warning'style="text-align:center;">OPTION</th>
+<th class='alert alert-warning'style="text-align:center;">AVERAGE MARKS</th>
+<th class='alert alert-warning'style="text-align:center;">GRADE</th>
+
+</tr>
+</thead>
+
+<tbody>
+{%for s in poormath%}  
+
+<tr>
+<td class="td">{{forloop.counter}}</td>
+<td class="td">{{s.username}}</td>
+<td class="td">{{s.fullname}}</td>
+<td class="td" style="text-align:center;">{{s.sex}}</td>
+<td class="td" style="text-align:center;">{{s.option}}</td>
+<td class="td" style="text-align:center;">{{s.math}}</td>
+<td style="text-align:center;"> <i class="somo">
+{%if s.math > 79 %}'A'
+{%elif s.math > 69 %}
+'B'{%elif s.math > 59 %}
+'C'{%elif s.math > 49 %}
+'D'{%elif s.math > 39 %}
+'E'{%elif s.math > 34 %}
+'S'{%else%}'F'{%endif%}
+
+</i></td>
+
+
+</tr>
+
+{%endfor%}
+
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table class="table">
+  <br>
+  <thead>
+<tr>
+<th colspan="9" class='alert alert-success'><B>EXAMINATION BEST SEVEN PERFORMANCE IN COMPUTER SCIENCE</B></th>
+</tr>
+
+</table>
+
+<div class="table-responsive ">
+<table id="mytablepoorphy" class="table table-success" cellspacing="0" width="100%" >
+  <thead>
+      <tr>
+        <th class='alert alert-success'> &nbsp</th>
+        <th class='alert alert-success'>INDEX NUMBER</th>
+        <th class='alert alert-success'>FULL NAME</th>
+          <th class='alert alert-success' style="text-align:center;">GENDER</th>
+          <th class='alert alert-success'style="text-align:center;">OPTION</th>
+          <th class='alert alert-success'style="text-align:center;">AVERAGE MARKS</th>
+          <th class='alert alert-success'style="text-align:center;">GRADE</th>
+            
+      </tr>
+  </thead>
+
+        <tbody>
+{%for s in bestcomp%}  
+
+<tr>
+<td class="td">{{forloop.counter}}</td>
+<td class="btd" style="text-align:left;">{{s.username}}</td>
+<td class="btd" style="text-align:left;">{{s.fullname}}</td>
+<td class="btd" style="text-align:center;">{{s.sex}}</td>
+<td class="btd" style="text-align:center;">{{s.option}}</td>
+<td class="btd" style="text-align:center;">{{s.comp}}</td>
+<td style="text-align:center;color:black;font-weight:bold;"> <i class="somo">
+{%if s.comp > 79 %}'A'
+{%elif s.comp > 69 %}
+'B'{%elif s.comp > 59 %}
+'C'{%elif s.comp > 49 %}
+'D'{%elif s.comp > 39 %}
+'E'{%elif s.comp > 34 %}
+'S'{%else%}'F'{%endif%}
+
+</i></td>
+
+
+</tr>
+
+{%endfor%}
+
+</tbody>
+</table>
+
+</div>
+
+      
+<table class="table">
+
+<thead>
+<tr>
+<th colspan="9" class='alert alert-danger'><B>EXAMINATION POOR SEVEN PERFORMANCE IN COMPUTERB SCIENCE</B></th>
+</tr>
+
+</table>
+
+
+<table id="mytablepoorphy" class="table table-dark" cellspacing="0" width="100%" style='background-color:pale;'>
+<thead>
+<tr>
+<th class='alert alert-warning'> &nbsp</th>
+<th class='alert alert-warning'>INDEX NUMBER</th>
+<th class='alert alert-warning'>FULL NAME</th>
+<th class='alert alert-warning' style="text-align:center;">GENDER</th>
+<th class='alert alert-warning'style="text-align:center;">OPTION</th>
+<th class='alert alert-warning'style="text-align:center;">AVERAGE MARKS</th>
+<th class='alert alert-warning'style="text-align:center;">GRADE</th>
+
+</tr>
+</thead>
+
+<tbody>
+{%for s in poorcomp%}  
+
+<tr>
+<td class="td">{{forloop.counter}}</td>
+<td class="td">{{s.username}}</td>
+<td class="td">{{s.fullname}}</td>
+<td class="td" style="text-align:center;">{{s.sex}}</td>
+<td class="td" style="text-align:center;">{{s.option}}</td>
+<td class="td" style="text-align:center;">{{s.comp}}</td>
+<td style="text-align:center;"> <i class="somo">
+{%if s.comp > 79 %}'A'
+{%elif s.comp > 69 %}
+'B'{%elif s.comp > 59 %}
+'C'{%elif s.comp > 49 %}
+'D'{%elif s.comp > 39 %}
+'E'{%elif s.comp > 34 %}
+'S'{%else%}'F'{%endif%}
+
+</i></td>
+
+
+</tr>
+
+{%endfor%}
+
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table class="table">
+  <br>
+  <thead>
+<tr>
+<th colspan="9" class='alert alert-success'><B>EXAMINATION BEST TEN PERFORMANCE IN EDUCATION</B></th>
+</tr>
+
+</table>
+
+<div class="table-responsive ">
+<table id="mytablepoorphy" class="table table-success" cellspacing="0" width="100%" >
+  <thead>
+      <tr>
+        <th class='alert alert-success'> &nbsp</th>
+        <th class='alert alert-success'>INDEX NUMBER</th>
+        <th class='alert alert-success'>FULL NAME</th>
+          <th class='alert alert-success' style="text-align:center;">GENDER</th>
+          <th class='alert alert-success'style="text-align:center;">OPTION</th>
+          <th class='alert alert-success'style="text-align:center;">AVERAGE MARKS</th>
+          <th class='alert alert-success'style="text-align:center;">GRADE</th>
+            
+      </tr>
+  </thead>
+
+        <tbody>
+{%for s in bestedu%}  
+
+<tr>
+<td class="td">{{forloop.counter}}</td>
+<td class="btd" style="text-align:left;">{{s.username}}</td>
+<td class="btd" style="text-align:left;">{{s.fullname}}</td>
+<td class="btd" style="text-align:center;">{{s.sex}}</td>
+<td class="btd" style="text-align:center;">{{s.option}}</td>
+<td class="btd" style="text-align:center;">{{s.edu}}</td>
+<td style="text-align:center;color:black;font-weight:bold;"> <i class="somo">
+{%if s.edu > 79 %}'A'
+{%elif s.edu > 69 %}
+'B'{%elif s.edu > 59 %}
+'C'{%elif s.edu > 49 %}
+'D'{%elif s.edu > 39 %}
+'E'{%elif s.edu > 34 %}
+'S'{%else%}'F'{%endif%}
+
+</i></td>
+
+
+</tr>
+
+{%endfor%}
+
+</tbody>
+</table>
+
+</div>
+
+      
+<table class="table">
+
+<thead>
+<tr>
+<th colspan="9" class='alert alert-danger'><B>EXAMINATION POOR TEN PERFORMANCE IN EDUCATION</B></th>
+</tr>
+
+</table>
+
+
+<table id="mytablepooredu" class="table table-dark" cellspacing="0" width="100%" style='background-color:pale;'>
+<thead>
+<tr>
+<th class='alert alert-warning'> &nbsp</th>
+<th class='alert alert-warning'>INDEX NUMBER</th>
+<th class='alert alert-warning'>FULL NAME</th>
+<th class='alert alert-warning' style="text-align:center;">GENDER</th>
+<th class='alert alert-warning'style="text-align:center;">OPTION</th>
+<th class='alert alert-warning'style="text-align:center;">AVERAGE MARKS</th>
+<th class='alert alert-warning'style="text-align:center;">GRADE</th>
+
+</tr>
+</thead>
+
+<tbody>
+{%for s in pooredu%}  
+
+<tr>
+<td class="td">{{forloop.counter}}</td>
+<td class="td">{{s.username}}</td>
+<td class="td">{{s.fullname}}</td>
+<td class="td" style="text-align:center;">{{s.sex}}</td>
+<td class="td" style="text-align:center;">{{s.option}}</td>
+<td class="td" style="text-align:center;">{{s.edu}}</td>
+<td style="text-align:center;"> <i class="somo">
+{%if s.edu > 79 %}'A'
+{%elif s.edu > 69 %}
+'B'{%elif s.edu > 59 %}
+'C'{%elif s.edu > 49 %}
+'D'{%elif s.edu > 39 %}
+'E'{%elif s.edu > 34 %}
+'S'{%else%}'F'{%endif%}
+
+</i></td>
+
+
+</tr>
+
+{%endfor%}
+
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table class="table">
+  <br>
+  <thead>
+<tr>
+<th colspan="9" class='alert alert-success'><B>EXAMINATION BEST TEN PERFORMANCE IN BASIC APLIED MATHEMATICS</B></th>
+</tr>
+
+</table>
+
+<div class="table-responsive ">
+<table id="mytablepoorbam" class="table table-success" cellspacing="0" width="100%" >
+  <thead>
+      <tr>
+        <th class='alert alert-success'> &nbsp</th>
+        <th class='alert alert-success'>INDEX NUMBER</th>
+        <th class='alert alert-success'>FULL NAME</th>
+          <th class='alert alert-success' style="text-align:center;">GENDER</th>
+          <th class='alert alert-success'style="text-align:center;">OPTION</th>
+          <th class='alert alert-success'style="text-align:center;">AVERAGE MARKS</th>
+          <th class='alert alert-success'style="text-align:center;">GRADE</th>
+            
+      </tr>
+  </thead>
+
+        <tbody>
+{%for s in bestbam%}  
+
+<tr>
+<td class="td">{{forloop.counter}}</td>
+<td class="btd" style="text-align:left;">{{s.username}}</td>
+<td class="btd" style="text-align:left;">{{s.fullname}}</td>
+<td class="btd" style="text-align:center;">{{s.sex}}</td>
+<td class="btd" style="text-align:center;">{{s.option}}</td>
+<td class="btd" style="text-align:center;">{{s.bam}}</td>
+<td style="text-align:center;color:black;font-weight:bold;"> <i class="somo">
+{%if s.bam > 79 %}'A'
+{%elif s.bam > 69 %}
+'B'{%elif s.bam > 59 %}
+'C'{%elif s.bam > 49 %}
+'D'{%elif s.bam > 39 %}
+'E'{%elif s.bam > 34 %}
+'S'{%else%}'F'{%endif%}
+
+</i></td>
+
+
+</tr>
+
+{%endfor%}
+
+</tbody>
+</table>
+
+</div>
+
+      
+<table class="table">
+
+<thead>
+<tr>
+<th colspan="9" class='alert alert-danger'><B>EXAMINATION POOR TEN PERFORMANCE IN BASIC APLIED MATHEMATICS</B></th>
+</tr>
+
+</table>
+
+
+<table id="mytablepoorbam" class="table table-dark" cellspacing="0" width="100%" style='background-color:pale;'>
+<thead>
+<tr>
+<th class='alert alert-warning'> &nbsp</th>
+<th class='alert alert-warning'>INDEX NUMBER</th>
+<th class='alert alert-warning'>FULL NAME</th>
+<th class='alert alert-warning' style="text-align:center;">GENDER</th>
+<th class='alert alert-warning'style="text-align:center;">OPTION</th>
+<th class='alert alert-warning'style="text-align:center;">AVERAGE MARKS</th>
+<th class='alert alert-warning'style="text-align:center;">GRADE</th>
+
+</tr>
+</thead>
+
+<tbody>
+{%for s in poorbam%}  
+
+<tr>
+<td class="td">{{forloop.counter}}</td>
+<td class="td">{{s.username}}</td>
+<td class="td">{{s.fullname}}</td>
+<td class="td" style="text-align:center;">{{s.sex}}</td>
+<td class="td" style="text-align:center;">{{s.option}}</td>
+<td class="td" style="text-align:center;">{{s.bam}}</td>
+<td style="text-align:center;"> <i class="somo">
+{%if s.bam > 79 %}'A'
+{%elif s.bam > 69 %}
+'B'{%elif s.bam > 59 %}
+'C'{%elif s.bam > 49 %}
+'D'{%elif s.bam > 39 %}
+'E'{%elif s.bam > 34 %}
+'S'{%else%}'F'{%endif%}
+
+</i></td>
+
+
+</tr>
+
+{%endfor%}
+
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table class="table">
+  <br>
+  <thead>
+<tr>
+<th colspan="9" class='alert alert-success'><B>EXAMINATION BEST TEN PERFORMANCE IN GENERAL STUDY</B></th>
+</tr>
+
+</table>
+
+<div class="table-responsive ">
+<table id="mytablepoorphy" class="table table-success" cellspacing="0" width="100%" >
+  <thead>
+      <tr>
+        <th class='alert alert-success'> &nbsp</th>
+        <th class='alert alert-success'>INDEX NUMBER</th>
+        <th class='alert alert-success'>FULL NAME</th>
+          <th class='alert alert-success' style="text-align:center;">GENDER</th>
+          <th class='alert alert-success'style="text-align:center;">OPTION</th>
+          <th class='alert alert-success'style="text-align:center;">AVERAGE MARKS</th>
+          <th class='alert alert-success'style="text-align:center;">GRADE</th>
+            
+      </tr>
+  </thead>
+
+        <tbody>
+{%for s in bestgs%}  
+
+<tr>
+<td class="td">{{forloop.counter}}</td>
+<td class="btd" style="text-align:left;">{{s.username}}</td>
+<td class="btd" style="text-align:left;">{{s.fullname}}</td>
+<td class="btd" style="text-align:center;">{{s.sex}}</td>
+<td class="btd" style="text-align:center;">{{s.option}}</td>
+<td class="btd" style="text-align:center;">{{s.gs}}</td>
+<td style="text-align:center;color:black;font-weight:bold;"> <i class="somo">
+{%if s.gs > 79 %}'A'
+{%elif s.gs > 69 %}
+'B'{%elif s.gs > 59 %}
+'C'{%elif s.gs > 49 %}
+'D'{%elif s.gs > 39 %}
+'E'{%elif s.gs > 34 %}
+'S'{%else%}'F'{%endif%}
+
+</i></td>
+
+
+</tr>
+
+{%endfor%}
+
+</tbody>
+</table>
+
+</div>
+
+      
+<table class="table">
+
+<thead>
+<tr>
+<th colspan="9" class='alert alert-danger'><B>EXAMINATION POOR TEN PERFORMANCE IN GENERAL STUDY</B></th>
+</tr>
+
+</table>
+
+
+<table id="mytablepoorgs" class="table table-dark" cellspacing="0" width="100%" style='background-color:pale;'>
+<thead>
+<tr>
+<th class='alert alert-warning'> &nbsp</th>
+<th class='alert alert-warning'>INDEX NUMBER</th>
+<th class='alert alert-warning'>FULL NAME</th>
+<th class='alert alert-warning' style="text-align:center;">GENDER</th>
+<th class='alert alert-warning'style="text-align:center;">OPTION</th>
+<th class='alert alert-warning'style="text-align:center;">AVERAGE MARKS</th>
+<th class='alert alert-warning'style="text-align:center;">GRADE</th>
+
+</tr>
+</thead>
+
+<tbody>
+{%for s in poorgs%}  
+
+<tr>
+<td class="td">{{forloop.counter}}</td>
+<td class="td">{{s.username}}</td>
+<td class="td">{{s.fullname}}</td>
+<td class="td" style="text-align:center;">{{s.sex}}</td>
+<td class="td" style="text-align:center;">{{s.option}}</td>
+<td class="td" style="text-align:center;">{{s.gs}}</td>
+<td style="text-align:center;"> <i class="somo">
+{%if s.gs > 79 %}'A'
+{%elif s.gs > 69 %}
+'B'{%elif s.gs > 59 %}
+'C'{%elif s.gs > 49 %}
+'D'{%elif s.gs > 39 %}
+'E'{%elif s.gs > 34 %}
+'S'{%else%}'F'{%endif%}
+
+</i></td>
+
+
+</tr>
+
+{%endfor%}
+
+</tbody>
+</table>
+
+
+        </div>
+    </div>
+    {% block scripts %}
+
+    <script type="text/javascript"  language="javascript">
+      function printdivone(printpageone){
+     var headstr = "<html><head><title></title></head><body>";
+     var footstr = "</body>";
+      var newstr = document.all.item(printpageone).innerHTML;
+      var oldstr = document.body.innerHTML;
+      document.body.innerHTML = headstr+'<br>'+newstr+footstr;
+      window.print();
+      document.body.innerHTML = oldstr;
+      return false;
+      }
+      </script>
+{% endblock scripts %}
+  {% endblock %}

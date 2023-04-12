@@ -1,0 +1,60 @@
+{% extends 'staff/sidebar.html' %}
+                    {% load static %}
+                    {% block content %}
+                    <style>    table {
+                           border-collapse: collapse;
+                           width: 100%;
+                         }
+                         th,
+                         td {
+                           padding: 8px 16px;
+                           border: 1px solid #ccc;
+                    
+                         }
+                         th {
+                           background: #eee;
+                         }
+                    
+                    </style>
+                    
+                    <div class="table-content">
+                        <div class"alert alert-primary"> marks uploading</div>
+                      {% if  i%}
+                      {% if  i > 0 %}
+                       <div class='alert alert-success alert-dismissible animated zoomIn'  style='margin:0px 40px;'>
+                           <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+                           <!-- {%for success in messages%}
+                           <b>{{success}}</b>
+                           {%endfor%} -->
+                            <b>{{i}}  &nbsp RECORD UPLOADED UCCESSIFULLY</b>
+                         </div>
+                         {%endif%}
+                            {%endif%}
+                    
+                            {% if  l %}
+                          {% if  j > 0 %}
+                         <div style='margin:0px 40px;' class="alert alert-danger  alert-dismissible animated zoomIn'">
+                           <h4><span style="color:blue;">{{j}}</span> &nbsp LIST OF UNSUCCESSIFULLY</H4>
+                           <p>=================================================================</p>
+                            <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+                    
+                           {%for li in l %}
+                           <b>{{li}}</b>,&nbsp
+                           {%endfor%}
+                            </div>
+                              {%endif%}
+                                 {%endif%}
+                         
+                             <form action="{% url 'marks'%} " method="post" class="form" enctype="multipart/form-data" > {% csrf_token %}
+                               
+                                                                                       <input type="file" name="myfile" >
+                                                                                      
+                                                                                       <button type="submit" name="upload" value="upload" class="btn btn-primary">upload file<i class="fa fa-upload"></i></button>
+                                                                                       </form>
+                                                                                     
+                    
+                     
+                                    
+    </div>
+
+  {% endblock %}

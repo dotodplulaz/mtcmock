@@ -1,0 +1,147 @@
+{% extends 'student/sidebar.html' %}
+{% load static %}
+{% block style %} 
+<style>
+  table {
+    border-collapse: collapse;
+    width: 88%;
+  }
+  th,
+  td {
+    padding: 8px 16px; 
+    border: 1px solid #ccc;
+  /*  width: 14%; */
+  }
+  th {
+    background: #eee;
+    /*  width: 14%; */
+  }
+  .img1{
+          float: left;
+            height: 80px;
+           width: 90px;
+       }
+
+       .tthh{
+         color:black;
+         background:white;
+       }
+
+  </style>
+  {% endblock style %} 
+{% block content %}
+
+
+<div class="card-body">
+  <div class='alert alert-success alert-dismissible animated zoomIn'>
+    <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+   Tuna saa 1 mbele tufunge matokeo Kwani Taari Yamebandikwa FRANKEN HALL
+  </div>
+  {% if  messages%}
+   <div class='alert alert-success alert-dismissible animated zoomIn'>
+       <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+       {%for success in messages%}
+       <b>{{success}}</b>
+       {%endfor%}
+     </div>
+     {%endif%}
+       {% if  failed %}
+     <div class='alert alert-danger alert-dismissible animated zoomIn'>
+         <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+         <b>{{failed}}</b>
+       </div>
+       {%endif%}
+    <div class="table-responsive ">
+ 
+
+
+
+
+ 
+
+
+      <table style="width:100%;">
+        <tr>
+          <th style="width:12%;" rowspan="2" class="tthh">  <img src="{% static 'profile/logo.png'%}" class="img1"> </th>
+          <th colspan="2" style="width:74%;" class="tthh">
+            <h1 class="h3" style="color: black;font-size: 120%;text-align: center;width:98%;font-weight: bold;">MINISTRY OF EDUCATION SCIENCE AND TECHNOLOGY</h1>
+           <h1 class="h3" style="font-size: 110%;text-align: center; color: rgba(2, 180, 1, 0.9); font-weight: bold;">MOROGORO TEACHER'S COLLEGE</h1>
+            <h1 class="h3" style="color: black;font-size: 100%;text-align: center;">P. O. BOX   691, MOROGORO, TANZANIA</h1>
+             <h1 class="h3" style="color: blue;font-size: 100%;text-align: center;font-family:Verdana;">MOTCO ONLINE MOCK RESULTS 2023</h1>
+      </th>
+           
+        </tr>
+        </table>
+        <table style='width:88%;'>
+                                  <tbody>
+
+<tr><td></td><td>FULL NAME </td> <td>{{user.fullname}} </td> </tr>
+<tr> <td></td><td>INDEX NUMBER </td> <td>{{user.username}} </td></tr> 
+<tr><td></td> <td>GENDER | SEX </td>    <td> {%if  user.sex == 'M'%}MALE {%else%}FEMALE{%endif%}</td></tr>
+  <tr><td></td> <td>COURSE |OPTION </td>    <td> {{user.option}}</td></tr>
+{%if user.option == 'CBE'%}
+<tr><td></td> <td>CHEMISTRY </td>    <td> {{student.subject.CHEM}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.CG}}</i></td></tr>
+<tr><td></td> <td>BIOLOGY </td>    <td> {{student.subject.BIO}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.BG}}</i></td></tr>
+<tr><td></td> <td>EDUCATION </td>    <td> {{student.subject.EDU}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.EG}}</i></td></tr>
+  <tr><td></td> <td>BASIC APPLIED MATHEMATIC </td>    <td> {{student.subject.BAM}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.BAG}}</i></td></tr>
+    <tr><td></td> <td>GENERAL STUDY </td>    <td> {{student.subject.GS}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.GSG}}</i></td></tr>
+    {%elif user.option == 'CME'%}
+    <tr><td></td> <td>CHEMISTRY </td>    <td> {{student.subject.CHEM}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.CG}}</i></td></tr>
+      <tr><td></td> <td>ADVANCED MATHEMATICS </td>    <td> {{student.subject.MATH}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.MG}}</i></td></tr>
+        <tr><td></td> <td>EDUCATION </td>    <td> {{student.subject.EDU}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.EG}}</i></td></tr>
+          
+            <tr><td></td> <td>GENERAL STUDY </td>    <td> {{student.subject.GS}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.GSG}}</i></td></tr>
+            {%elif user.option == 'PBE'%}
+            <tr><td></td> <td>PHYSICS </td>    <td> {{student.subject.PHY}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.PG}}</i></td></tr>
+              <tr><td></td> <td>BIOLOGY </td>    <td> {{student.subject.BIO}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.BG}}</i></td></tr>
+                <tr><td></td> <td>EDUCATION </td>    <td> {{student.subject.EDU}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.EG}}</i></td></tr>
+                  <tr><td></td> <td>BASIC APPLIED MATHEMATIC </td>    <td> {{student.subject.BAM}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.BAG}}</i></td></tr>
+                    <tr><td></td> <td>GENERAL STUDY </td>    <td> {{student.subject.GS}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.GSG}}</i></td></tr>
+                    {%elif user.option == 'PCE'%}
+                    <tr><td>   <tr><td></td> <td>PHYSICS </td>    <td> {{student.subject.PHY}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.PG}}</i></td></tr>
+                    <tr><td></td> <td>CHEMISTRY </td>    <td> {{student.subject.CHEM}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.CG}}</i></td></tr>
+                        <tr><td></td> <td>EDUCATION </td>    <td> {{student.subject.EDU}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.EG}}</i></td></tr>
+                          <tr><td></td> <td>BASIC APPLIED MATHEMATIC </td>    <td> {{student.subject.BAM}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.BAG}}</i></td></tr>
+                            <tr><td></td> <td>GENERAL STUDY </td>    <td> {{student.subject.GS}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.GSG}}</i></td></tr>
+                            {%elif user.option == 'PME'%}
+                            <tr><td>   <tr><td></td> <td>PHYSICS </td>    <td> {{student.subject.PHY}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.PG}}</i></td></tr>
+                <tr><td></td> <td>ADVANCED MATHEMATICS </td>    <td> {{student.subject.MATH}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.MG}}</i></td></tr>
+                                <tr><td></td> <td>EDUCATION </td>    <td> {{student.subject.EDU}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.EG}}</i></td></tr>
+                                    <tr><td></td> <td>GENERAL STUDY </td>    <td> {{student.subject.GS}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.GSG}}</i></td></tr>
+                                    {%elif user.option == 'MCE'%}
+                                    <tr><td></td> <td>COMPUTER SCIENCE </td>    <td> {{student.subject.COMP}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.COG}}</i></td></tr>
+                                    <tr><td></td> <td>ADVANCED MATHEMATICS </td>    <td> {{student.subject.MATH}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.MG}}</i></td></tr>    <tr><td></td> <td>EDUCATION </td>    <td> {{student.subject.EDU}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.EG}}</i></td></tr>
+                                    <tr><td></td> <td>EDUCATION </td>    <td> {{student.subject.EDU}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.EG}}</i></td></tr>
+                                            <tr><td></td> <td>GENERAL STUDY </td>    <td> {{student.subject.GS}}  &nbsp &nbsp  <i class='badge badge-success'> {{student.grade.GSG}}</i></td></tr>
+                                                                                                                
+    {%else%}
+                                 <I class='alert alert-primary'> TAFADHARI FIKA K1 MATOKEO YAKO HAYAONEKANI VYEMAA</I>
+                                  {%endif %}
+                                  <tr> <td></td> <td>AGGREGATE POINTS </td>    <td> {{student.point}}</td></tr>
+                                    <tr><td></td> <td>DIVISION  </td>    <td> {{student.division}}</td></tr>
+                                  </tbody>
+                                  </table>
+        </div>
+    </div>
+    {% block scripts %}
+
+<script>
+    $(document).ready(function() {
+    table = $('#mytable').DataTable( {
+       lengthChange: false,
+       retrieve: true,
+       paging: false,
+      buttons: [ 'copy', 'excel', 'csv', 'pdf', 'colvis' ]
+         //buttons: [ 'excel', 'pdf', 'colvis' ]
+
+
+    } );
+
+    table.buttons().container()
+       .appendTo( '#mytable_wrapper .col-md-6:eq(0)' );
+    } );
+    </script>
+
+
+{% endblock scripts %}
+  {% endblock %}

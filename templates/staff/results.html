@@ -1,0 +1,188 @@
+{% extends 'staff/sidebar.html' %}
+{% load static %}
+{% block style %} 
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      .dp{
+        padding: 8px 16px;
+        border: 1px solid #ccc;
+        text-align:center;
+ 
+      }
+     .dp {
+        border: 1px solid #a1b2c3;
+        text-align:center;
+      }
+  </style>
+  {% endblock style %} 
+{% block content %}
+ 
+<div class="card-body">
+  {% if  messages%}
+   <div class='alert alert-success alert-dismissible animated zoomIn'>
+       <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+       {%for success in messages%}
+       <b>{{success}}</b>
+       {%endfor%}
+     </div>
+     {%endif%}
+       {% if  failed %}
+     <div class='alert alert-danger alert-dismissible animated zoomIn'>
+         <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+         <b>{{failed}}</b>
+       </div>
+       {%endif%}
+
+       <input name="b_print" type="button" class="btn btn-success"   onClick="printdivone('div_printone');" value="PRINT RESULTS MOTCO REPORT" style ="float:left;width:70%; "><br><br>
+       <div id="div_printone">
+    <div class="table-responsive ">
+ 
+        <table class="table">
+            <br>
+            <thead>
+     <tr>
+         <th colspan="9" class='alert alert-success'><B>EXAMINATION CENTER STUDENTS DIVISION PERFORMANCE</B></th>
+   </tr>
+   </thead>
+      <tbody>
+          <tr><td style="text-align:center;font-weight:bold;border: 1px solid #a1b2c3;">SEX</td>  <td style="text-align:center;font-weight:bold;border: 1px solid #a1b2c3;"> I</td>   <td style="text-align:center;font-weight:bold;border: 1px solid #a1b2c3;">II</td>    <td style="text-align:center;font-weight:bold;border: 1px solid #a1b2c3;">III</td>    <td style="text-align:center;font-weight:bold;border: 1px solid #a1b2c3;">IV</td>    <td style="text-align:center;font-weight:bold;border: 1px solid #a1b2c3;">0</td>   <td style="text-align:center;font-weight:bold;border: 1px solid #a1b2c3;">INC</td>    <td style="text-align:center;font-weight:bold;border: 1px solid #a1b2c3;">ABS</td>    <td style="text-align:center;font-weight:bold;border: 1px solid #a1b2c3;">TOAL</td></tr>
+          <tr><td class='dp'>MALE</td>  <td class='dp'>{{mone}} </td>   <td class='dp'>{{mtwo}}</td>    <td class='dp'>{{mthree}}</td>    <td class='dp'>{{mfour}}</td>    <td class='dp'>{{mzero}}</td>   <td class='dp'>0</td>    <td class='dp'>0</td>    <td class='dp'>{{tmale}}</td></tr>
+          <tr><td class='dp'>FEMALE</td>  <td class='dp'>{{fone}} </td>   <td class='dp'>{{ftwo}}</td>    <td class='dp'>{{fthree}}</td>    <td class='dp'>{{ffour}}</td>    <td class='dp'>{{fzero}}</td>   <td class='dp'>0</td>    <td class='dp'>0</td>    <td class='dp'>{{tfemale}}</td></tr>
+          <tr><td class='dp'>TOTAL</td>  <td class='dp'> {{tone}}</td>   <td class='dp'>{{ttwo}}</td>    <td class='dp'>{{tthree}}</td>    <td class='dp'>{{tfour}}</td>    <td class='dp'>{{tzero}}</td>   <td class='dp'>0</td>    <td class='dp'>0</td>    <td class='dp'>{{tall}}</td></tr>
+     
+        </tbody>
+    </table>
+
+    <table id="myTable" class="table">
+        <br>
+        <thead>
+ <tr>
+     <th colspan="18" class='alert alert-success'><B>
+        EXAMINATION CENTER STUDENTS SUBJECTS PERFORMANCE</B></th>
+</tr>
+<tr>
+    <th></th> 
+    <th colspan="2" >  SUBJECTS NAME</th>
+    <th colspan="2" style='border: 1px solid #ccc;' class='dp'>A </th>
+    <th colspan="2" style='border: 1px solid #ccc;' class='dp'> B</th>
+    <th colspan="2" style='border: 1px solid #ccc;' class='dp'> C</th>
+    <th colspan="2" style='border: 1px solid #ccc;' class='dp'> D</th>
+    <th colspan="2" style='border: 1px solid #ccc;' class='dp'> E</th>
+    <th colspan="2" style='border: 1px solid #ccc;' class='dp'> S</th>
+    <th colspan="2" style='border: 1px solid #ccc;' class='dp'> F</th>
+</tr>
+</thead>
+  <tbody>
+    <tr><td class='dp'></td>  
+      <td colspan='2'></td>
+         <td class='dp'>M</td>    <td class='dp'>F</td> <td class='dp'>M</td>    <td class='dp'>F</td><td class='dp'>M</td>    <td class='dp'>F</td><td class='dp'>M</td>    <td class='dp'>F</td><td class='dp'>M</td>    <td class='dp'>F</td><td class='dp'>M</td>    <td class='dp'>F</td><td class='dp'>M</td>    <td class='dp'>F</td>
+               
+  </tr>
+       <tr><td class='dp'></td>  
+        <td colspan='2'>PHYSICS</td>
+           <td class='dp'>{{maphy}}</td>    <td class='dp'>{{faphy}}</td>
+           <td class='dp'>{{mbphy}}</td>    <td class='dp'>{{fbphy}}</td>
+           <td class='dp'>{{mcphy}}</td>    <td class='dp'>{{fcphy}}</td>
+           <td class='dp'>{{mdphy}}</td>    <td class='dp'>{{fdphy}}</td>
+           <td class='dp'>{{mephy}}</td>    <td class='dp'>{{fephy}}</td>
+           <td class='dp'>{{msphy}}</td>    <td class='dp'>{{fsphy}}</td>
+           <td class='dp'>{{mfphy}}</td>    <td class='dp'>{{ffphy}}</td>       
+    </tr>
+    <tr><td class='dp'></td>  
+      <td colspan='2'>CHEMISTRY</td>
+         <td class='dp'>{{machem}}</td>    <td class='dp'>{{fachem}}</td>
+         <td class='dp'>{{mbchem}}</td>    <td class='dp'>{{fbchem}}</td>
+         <td class='dp'>{{mcchem}}</td>    <td class='dp'>{{fcchem}}</td>
+         <td class='dp'>{{mdchem}}</td>    <td class='dp'>{{fdchem}}</td>
+         <td class='dp'>{{mechem}}</td>    <td class='dp'>{{fechem}}</td>
+         <td class='dp'>{{mschem}}</td>    <td class='dp'>{{fschem}}</td>
+         <td class='dp'>{{mfchem}}</td>    <td class='dp'>{{ffchem}}</td>       
+  </tr>
+  <tr><td class='dp'></td>  
+    <td colspan='2'>BIOLOGY</td>
+       <td class='dp'>{{mabio}}</td>    <td class='dp'>{{fabio}}</td>
+       <td class='dp'>{{mbbio}}</td>    <td class='dp'>{{fbbio}}</td>
+       <td class='dp'>{{mcbio}}</td>    <td class='dp'>{{fcbio}}</td>
+       <td class='dp'>{{mdbio}}</td>    <td class='dp'>{{fdbio}}</td>
+       <td class='dp'>{{mebio}}</td>    <td class='dp'>{{febio}}</td>
+       <td class='dp'>{{msbio}}</td>    <td class='dp'>{{fsbio}}</td>
+       <td class='dp'>{{mfbio}}</td>    <td class='dp'>{{ffbio}}</td>       
+</tr>
+<tr><td class='dp'></td>  
+  <td colspan='2'>ADVANCED MATHEMATICS</td>
+     <td class='dp'>{{mamath}}</td>    <td class='dp'>{{famath}}</td>
+     <td class='dp'>{{mbmath}}</td>    <td class='dp'>{{fbmath}}</td>
+     <td class='dp'>{{mcmath}}</td>    <td class='dp'>{{fcmath}}</td>
+     <td class='dp'>{{mdmath}}</td>    <td class='dp'>{{fdmath}}</td>
+     <td class='dp'>{{memath}}</td>    <td class='dp'>{{femath}}</td>
+     <td class='dp'>{{msmath}}</td>    <td class='dp'>{{fsmath}}</td>
+     <td class='dp'>{{mfmath}}</td>    <td class='dp'>{{ffmath}}</td>       
+</tr>
+<tr><td class='dp'></td>  
+  <td colspan='2'>GENERAL STUDY</td>
+     <td class='dp'>{{mags}}</td>    <td class='dp'>{{fags}}</td>
+     <td class='dp'>{{mbgs}}</td>    <td class='dp'>{{fbgs}}</td>
+     <td class='dp'>{{mcgs}}</td>    <td class='dp'>{{fcgs}}</td>
+     <td class='dp'>{{mdgs}}</td>    <td class='dp'>{{fdgs}}</td>
+     <td class='dp'>{{megs}}</td>    <td class='dp'>{{fegs}}</td>
+     <td class='dp'>{{msgs}}</td>    <td class='dp'>{{fsgs}}</td>
+     <td class='dp'>{{mfgs}}</td>    <td class='dp'>{{ffgs}}</td>       
+</tr>
+<tr><td class='dp'></td>  
+  <td colspan='2'>BASIC APPLIED MATHEMATICS</td>
+     <td class='dp'>{{mabam}}</td>    <td class='dp'>{{fabam}}</td>
+     <td class='dp'>{{mbbam}}</td>    <td class='dp'>{{fbbam}}</td>
+     <td class='dp'>{{mcbam}}</td>    <td class='dp'>{{fcbam}}</td>
+     <td class='dp'>{{mdbam}}</td>    <td class='dp'>{{fdbam}}</td>
+     <td class='dp'>{{mebam}}</td>    <td class='dp'>{{febam}}</td>
+     <td class='dp'>{{msbam}}</td>    <td class='dp'>{{fsbam}}</td>
+     <td class='dp'>{{mfbam}}</td>    <td class='dp'>{{ffbam}}</td>       
+</tr>
+<tr><td class='dp'></td>  
+  <td colspan='2'>COMPUTER SCIENCE</td>
+     <td class='dp'>{{macomp}}</td>    <td class='dp'>{{facomp}}</td>
+     <td class='dp'>{{mbcomp}}</td>    <td class='dp'>{{fbcomp}}</td>
+     <td class='dp'>{{mccomp}}</td>    <td class='dp'>{{fccomp}}</td>
+     <td class='dp'>{{mdcomp}}</td>    <td class='dp'>{{fdcomp}}</td>
+     <td class='dp'>{{mecomp}}</td>    <td class='dp'>{{fecomp}}</td>
+     <td class='dp'>{{mscomp}}</td>    <td class='dp'>{{fscomp}}</td>
+     <td class='dp'>{{mfcomp}}</td>    <td class='dp'>{{ffcomp}}</td>       
+</tr>
+<tr><td class='dp'></td>  
+  <td colspan='2'>EDUCATION</td>
+     <td class='dp'>{{maedu}}</td>    <td class='dp'>{{faedu}}</td>
+     <td class='dp'>{{mbedu}}</td>    <td class='dp'>{{fbedu}}</td>
+     <td class='dp'>{{mcedu}}</td>    <td class='dp'>{{fcedu}}</td>
+     <td class='dp'>{{mdedu}}</td>    <td class='dp'>{{fdedu}}</td>
+     <td class='dp'>{{meedu}}</td>    <td class='dp'>{{feedu}}</td>
+     <td class='dp'>{{msedu}}</td>    <td class='dp'>{{fsedu}}</td>
+     <td class='dp'>{{mfedu}}</td>    <td class='dp'>{{ffedu}}</td>       
+</tr>
+   
+    </tbody>
+</table>
+
+
+
+</div>
+        </div>
+    </div>
+    {% block scripts %}
+
+    <script type="text/javascript"  language="javascript">
+      function printdivone(printpageone){
+     var headstr = "<html><head><title></title></head><body>";
+     var footstr = "</body>";
+      var newstr = document.all.item(printpageone).innerHTML;
+      var oldstr = document.body.innerHTML;
+      document.body.innerHTML = headstr+'<br>'+newstr+footstr;
+      window.print();
+      document.body.innerHTML = oldstr;
+      return false;
+      }
+      </script>
+{% endblock scripts %}
+  {% endblock %}

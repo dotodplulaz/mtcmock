@@ -1,0 +1,289 @@
+{% extends 'staff/sidebar.html' %}
+{% load static %}
+{% block style %} 
+<style>
+  .th{
+  background: #eee;padding: 8px 16px;
+  border: 1px solid #eee;
+}
+.td{
+padding: 8px 16px;
+border: 1px solid #ccc;
+font-weight:bold;
+}
+.somo{
+font-weight:bold;
+}
+input[type='number']{
+  border:none;
+  max-width:120px;
+  background-color:gray;
+  color:blue;
+  font-weight:bold;
+}
+input[type='number']:hover{
+  border:none;
+  border-bottom:1px solid blue;
+  font-weight:bold;
+  padding:4px 0 4px 0;
+  max-width:120px;
+  background-color:white;
+  color:black;
+}
+  </style>
+  {% endblock style %} 
+{% block content %}
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
+
+
+<div class="card-body">
+
+   <div class='alert alert-success alert-dismissible animated zoomIn'>
+       <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+      Tuna saa 1 mbele tufunge matokeo Kwani Taari Yamebandikwa FRANKEN HALL
+     </div>
+
+    
+    <div class="table-responsive ">
+ 
+      <table id="mytable" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+          <thead>
+              <tr>
+                <th style="color: white; background-color: #1a2b3c;">No</th>
+                <th style="color: white; background-color: #1a2b3c;">INDEX NUMBER</th>
+                <th style="color: white; background-color: #1a2b3c;">FULL NAME</th>
+                 <th style="color: white; background-color: #1a2b3c;" >GENDER</th>
+                  <th style="color: white; background-color: #1a2b3c;">OPTION</th>
+                  <th style="color: white; background-color: #1a2b3c;">PERFORMANCE SUBJECT LISTING</th>
+                  <th style="color: white; background-color: #1a2b3c;">DIVISION</th>
+                  <th style="color: white; background-color: #1a2b3c;">POINTS</th>
+              </tr>
+          </thead>
+       <tfoot>
+                 <tr>
+                  <th style="text-transform:lowercase;">no</th>
+                   <th style="text-transform:lowercase;">index number</th>
+                   <th style="text-transform:lowercase;">Full name</th>
+
+                     <th style="text-transform:lowercase;">Sex</th>
+                       <th style="text-transform:lowercase;">Option</th>
+                       <th style="text-transform:lowercase;">Performance Subject list</th>
+                       <th style="text-transform:lowercase;">Division</th>
+                       <th style="text-transform:lowercase;">Points</th>
+
+                    </tr>
+                </tfoot>
+                <tbody>
+   {%for s in accounts%}   
+   {%if s.option == 'CBE'%}     
+<tr>
+  <td class="td">{{forloop.counter}}</td>
+<td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+
+  {%for r in results%} 
+  {%if s.username == r.username_id%}
+ 
+  <td>
+    <i class="somo">CHEM -</i>'{{r.grade.CG}}'&nbsp
+    <i class="somo"> BIO -</i> '{{r.grade.BG}}'&nbsp
+      <i class="somo">EDU -</i>  '{{r.grade.EG}}'&nbsp
+        <i class="somo"> BAM - </i> '{{r.grade.BAG}}'&nbsp
+          <i class="somo">GS -</i> '{{r.grade.GSG}}'&nbsp
+  </td>
+  <td class="td">{{r.division}}</td>
+  <td class="td">{{r.point}}</td>
+{%endif%}
+  {%endfor%}
+</tr>
+{%endif%}
+
+
+
+
+{% comment %} END OF CBE {% endcomment %}
+{%if s.option == 'CME'%}     
+<tr>
+  <td class="td">{{forloop.counter}}</td>
+<td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+
+  {%for r in results%} 
+  {%if s.username == r.username_id%}
+  <td>
+    <i class="somo">CHEM-</i>' {{r.grade.CG}}'&nbsp
+      <i class="somo">MATH-</i>' {{r.grade.MG}}'&nbsp
+        <i class="somo">EDU-</i>' {{r.grade.EG}}'&nbsp
+          <i class="somo">GS-</i>' {{r.grade.GSG}}'&nbsp
+  </td>
+  <td class="td">{{r.division}}</td>
+  <td class="td">{{r.point}}</td>
+{%endif%}
+  {%endfor%}
+</tr>
+{%endif%}
+
+
+
+
+{% comment %} END OF PBE {% endcomment %}
+{%if s.option == 'PBE'%}     
+<tr>
+  <td class="td">{{forloop.counter}}</td>
+<td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+
+  {%for r in results%} 
+  {%if s.username == r.username_id%}
+  <td>
+    <i class="somo">PHY-</i>' {{r.grade.PG}}'&nbsp
+    <i class="somo">BIO-</i>' {{r.grade.BG}}'&nbsp
+    <i class="somo">EDU-</i>' {{r.grade.EG}}'&nbsp
+  
+    <i class="somo">BAM-</i>' {{r.grade.BAG}}'&nbsp
+      <i class="somo">GS-</i>' {{r.grade.GSG}}'&nbsp
+  </td>
+  <td class="td">{{r.division}}</td>
+  <td class="td">{{r.point}}</td>
+{%endif%}
+  {%endfor%}
+</tr>
+{%endif%}
+
+
+
+
+
+
+{% comment %} END OF PBE {% endcomment %}
+{%if s.option == 'PME'%}     
+<tr>
+  <td class="td">{{forloop.counter}}</td>
+<td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+
+  {%for r in results%} 
+  {%if s.username == r.username_id%}
+  <td>
+    <i class="somo">PHY-</i>' {{r.grade.PG}}'&nbsp
+    <i class="somo">MATH-</i>' {{r.grade.MG}}'&nbsp
+    <i class="somo">EDU-</i>' {{r.grade.EG}}'&nbsp
+    <i class="somo">GS-</i>' {{r.grade.GSG}}'&nbsp
+  </td>
+  <td class="td">{{r.division}}</td>
+  <td class="td">{{r.point}}</td>
+{%endif%}
+  {%endfor%}
+</tr>
+{%endif%}
+
+
+
+
+{% comment %} END OF PME {% endcomment %}
+{%if s.option == 'PCE'%}     
+<tr>
+  <td class="td">{{forloop.counter}}</td>
+<td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+
+  {%for r in results%} 
+  {%if s.username == r.username_id%}
+  <td>
+    <i class="somo">PHY-</i>' {{r.grade.PG}}'&nbsp
+      <i class="somo">CHEM-</i>' {{r.grade.CG}}'&nbsp
+        <i class="somo">EDU-</i>' {{r.grade.EG}}'&nbsp
+
+          <i class="somo">BAM-</i>' {{r.grade.BAG}}'&nbsp
+            <i class="somo">GS-</i>' {{r.grade.GSG}}'&nbsp 
+  </td>
+  <td class="td">{{r.division}}</td>
+  <td class="td">{{r.point}}</td>
+{%endif%}
+  {%endfor%}
+</tr>
+{%endif%}
+
+
+
+
+
+{% comment %} END OF mcse {% endcomment %}
+{%if s.option == 'MCE'%}     
+<tr>
+  <td class="td">{{forloop.counter}}</td>
+<td class="td">{{s.username}}</td><td class="td">{{s.fullname}}</td><td class="td">{{s.sex}}</td><td class="td">{{s.option}}</td>
+
+  {%for r in results%} 
+  {%if s.username == r.username_id%}
+  <td>
+    <i class="somo">MATH-</i>' {{r.grade.MG}}'&nbsp
+      <i class="somo">COMP-</i>' {{r.grade.COG}}'&nbsp
+        <i class="somo">EDU-</i>' {{r.grade.EG}}'&nbsp
+          <i class="somo">GS-</i>' {{r.grade.GSG}}'&nbsp 
+  </td>
+  <td class="td">{{r.division}}</td>
+  <td class="td">{{r.point}}</td>
+{%endif%}
+  {%endfor%}
+</tr>
+{%endif%}
+
+
+
+
+
+
+
+  {%endfor%}
+                                           </tbody>
+                                       </table>
+
+
+
+                                       <table id="mytable1" class="table">
+                                        <thead>
+                                        <tr>
+                                     <th colspan='9'>EXAMINATION CENTER STUDENTS DIVISION PERFORMANCE</th>
+                                     
+                               </tr>
+                               </thead>
+                                  <tbody>
+        </div>
+    </div>
+    {% block scripts %}
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+    <script>
+    $(document).ready(function() {
+    table = $('#mytable').DataTable( {
+       lengthChange: false,
+       retrieve: true,
+       paging: false,
+      //{% comment %} buttons: [ 'copy', 'excel', 'csv', 'pdf', 'colvis','print' ] {% endcomment %}
+         buttons: ['print','excel',]
+        } );
+
+    table.buttons().container()
+       .appendTo( '#mytable_wrapper .col-md-6:eq(0)' );
+    } );
+    </script>
+
+
+{% endblock scripts %}
+  {% endblock %}
